@@ -43,7 +43,8 @@ CREATE TABLE employees (
     emp_password VARCHAR(20),
     emp_name VARCHAR(20),
     emp_surname VARCHAR(20),
-    emp_role VARCHAR(50)
+    emp_role VARCHAR(50),
+    emp_score INT DEFAULT 0
 );
 
 INSERT INTO employees (emp_username, emp_email, emp_password, emp_name, emp_surname, emp_role)
@@ -117,6 +118,7 @@ CREATE TABLE exams (
     count_of_assistants INT
 );
 
+/*
 INSERT INTO exams (course_id, exam_date, exam_time, number_of_classes, count_of_assistants)
 VALUES  (1, '2024-05-06', '09:00:00', 2, 2),
         (2, '2024-05-09', '11:00:00', 2, 2),
@@ -127,6 +129,7 @@ VALUES  (1, '2024-05-06', '09:00:00', 2, 2),
         (7, '2024-05-14', '11:00:00', 3, 3),
         (8, '2024-05-15', '18:00:00', 4, 4),
         (9, '2024-05-16', '09:00:00', 1, 1);
+*/
 
 
 CREATE TABLE assistant_exam (
@@ -135,6 +138,7 @@ CREATE TABLE assistant_exam (
     exam_id INT
 );
 
+/*
 INSERT INTO assistant_exam (emp_id, exam_id)
 VALUES  (1, 1),
         (1, 2),
@@ -145,3 +149,4 @@ VALUES  (1, 1),
         (2, 3),
         (2, 5),
         (2, 6);
+*/
