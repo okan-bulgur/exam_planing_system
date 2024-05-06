@@ -1,0 +1,41 @@
+
+body{
+    background-color: #1d2630;
+    text-align: center;
+}
+
+#header{
+    color: #1d2630;
+    font-size: xx-large;
+}
+
+#form{
+    background-color: rgb(255, 255, 255);
+    width: 25%;
+    border-radius: 4px;
+    margin:150px auto;
+    padding:50px;
+    box-shadow: 10px 10px 5px rgb(17, 96, 84);
+}
+
+#submit-btn{
+    color:rgb(255, 255, 255);
+    background-color: #1d2630;
+    font-size: medium;
+    border-radius: 10px;
+    width: 50%; /* Modified width value */
+    height: 25%; /* Decremented height value */
+}
+
+a {
+    color: #1d2630;
+    text-decoration: none;
+}
+
+input{
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+    border: 1px solid #1d2630;
+    margin: 10px;
+}
