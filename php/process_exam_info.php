@@ -43,11 +43,21 @@ if (!$conn) {
 
     if (mysqli_num_rows($result_course) == 0) {
         mysqli_close($conn);
-        header("Location: ../php/add_exam.php");
+        header("Location: ../php/add_exam.php?error=100");
         exit();
     }
 
     $row_course = mysqli_fetch_assoc($result_course);
+
+    $sql_department = "SELECT * FROM emp_department WHERE emp_id = " . $_SESSION['emp_id'];
+    $result_department = mysqli_query($conn, $sql_department) or die("15");
+    $row_department = mysqli_fetch_assoc($result_department);
+
+    if ($row_course['department_id'] != $row_department['department_id']) {
+        mysqli_close($conn);
+        header("Location: ../php/add_exam.php?error=200");
+        exit();
+    }
 
     $sql_exam = "INSERT INTO exams (course_id, exam_date, exam_time, number_of_classes, count_of_assistants) VALUES ('" . $row_course['course_id'] . "', '$date', '$time', '$num_class', '$num_assistants')";
     $result_exam = mysqli_query($conn, $sql_exam) or die("17");
@@ -57,6 +67,7 @@ if (!$conn) {
     $result_emp = mysqli_query($conn, $sql_emp) or die("18");
 
     $count = 0;
+    $assigned_assistants = array();
     
     if (mysqli_num_rows($result_emp) > 0) {
         while ($row_emp = mysqli_fetch_assoc($result_emp) and $count < $num_assistants) {
@@ -66,13 +77,13 @@ if (!$conn) {
             $sql_score = "UPDATE employees SET emp_score = emp_score + 1 WHERE emp_id = " . $row_emp['emp_id'];
             $result_score = mysqli_query($conn, $sql_score) or die("19");
 
+            $assigned_assistants[] = $row_emp['emp_name'] . ' ' . $row_emp['emp_surname'];
             $count = $count + 1;
         }
     }
 
     mysqli_close($conn);
-
-    header("Location: ../php/add_exam.php");
+    header("Location: ../php/add_exam.php?success=1&assigned_assistants=" . implode(",", $assigned_assistants));
     ?>
 </body>
 
