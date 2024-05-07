@@ -49,7 +49,7 @@ $_SESSION['course_list'] = $course_list;
 
 <body>
     <?php
-        echo "<h1> Wellcome " . $_SESSION['emp_name'] . " " . $_SESSION['emp_surname'] . "</h1>";
+        echo "<h1> Welcome " . $_SESSION['emp_name'] . " " . $_SESSION['emp_surname'] . "</h1>";
     ?>
 
     <button onclick="location.href='../php/logout.php'" class="logout-button">Log Out</button>
@@ -69,23 +69,23 @@ $_SESSION['course_list'] = $course_list;
 
     <?php
         echo "<h2>Course List</h2>";
-        echo "<table style='border: 1px solid black;'>";
+        echo "<table>";
         echo "<thead>";
         echo "<tr>";
-        echo "<th style='border: 1px solid black;'>Course Code</th>";
-        echo "<th style='border: 1px solid black;'>Course Name</th>";
-        echo "<th style='border: 1px solid black;'>Course Credits</th>";
-        echo "<th style='border: 1px solid black;'>Course Term</th>";
+        echo "<th>Course Code</th>";
+        echo "<th>Course Name</th>";
+        echo "<th>Course Credits</th>";
+        echo "<th>Course Term</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
 
         foreach ($course_list as $course) {
             echo "<tr>";
-            echo "<td style='border: 1px solid black;'>" . $course['course_code'] . "</td>";
-            echo "<td style='border: 1px solid black;'>" . $course['course_name'] . "</td>";
-            echo "<td style='border: 1px solid black;'>" . $course['course_credits'] . "</td>";
-            echo "<td style='border: 1px solid black;'>" . $course['course_term'] . "</td>";
+            echo "<td>" . $course['course_code'] . "</td>";
+            echo "<td>" . $course['course_name'] . "</td>";
+            echo "<td>" . $course['course_credits'] . "</td>";
+            echo "<td>" . $course['course_term'] . "</td>";
             echo "</tr>";
         }
         echo "</tbody>";
@@ -93,19 +93,19 @@ $_SESSION['course_list'] = $course_list;
 
         $week = isset($_GET['week']) ? $_GET['week'] : date('W');
 
-        echo "<div style='display: flex; justify-content: space-between; align-items: center;'>";
+        echo "<div display: flex; justify-content: space-between; align-items: center;>";
         echo "<h2>Weekly Plan (Week: " . $week .")</h2>";
-        echo "<button onclick='location.reload()'>Refresh</button>";
+        echo "<button onclick='location.reload()' class='refresh-button'>Refresh</button>";
         echo "</div>";
         
-        echo "<table style='border: 1px solid black;'>";
+        echo "<table>";
         echo "<thead>";
         echo "<tr>";
-        echo "<th style='border: 1px solid black;'>Course Code</th>";
-        echo "<th style='border: 1px solid black;'>Exam Date</th>";
-        echo "<th style='border: 1px solid black;'>Exam Time</th>";
-        echo "<th style='border: 1px solid black;'>Number of Classes</th>";
-        echo "<th style='border: 1px solid black;'>Count of Asistants</th>";
+        echo "<th>Course Code</th>";
+        echo "<th>Exam Date</th>";
+        echo "<th>Exam Time</th>";
+        echo "<th>Number of Classes</th>";
+        echo "<th>Count of Asistants</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -122,11 +122,11 @@ $_SESSION['course_list'] = $course_list;
                 if (mysqli_num_rows($result_exam) > 0) {
                     while ($exam_row = mysqli_fetch_assoc($result_exam)) {
                         echo "<tr>";
-                        echo "<td style='border: 1px solid black;'>" . $exam_row['course_code'] . "</td>";
-                        echo "<td style='border: 1px solid black;'>" . $exam_row['exam_date'] . "</td>";
-                        echo "<td style='border: 1px solid black;'>" . $exam_row['exam_time'] . "</td>";
-                        echo "<td style='border: 1px solid black;'>" . $exam_row['number_of_classes'] . "</td>";
-                        echo "<td style='border: 1px solid black;'>" . $exam_row['count_of_assistants'] . "</td>";
+                        echo "<td>" . $exam_row['course_code'] . "</td>";
+                        echo "<td>" . $exam_row['exam_date'] . "</td>";
+                        echo "<td>" . $exam_row['exam_time'] . "</td>";
+                        echo "<td>" . $exam_row['number_of_classes'] . "</td>";
+                        echo "<td>" . $exam_row['count_of_assistants'] . "</td>";
                         echo "</tr>";
                     }
                 }

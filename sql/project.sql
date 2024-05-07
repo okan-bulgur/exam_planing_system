@@ -67,9 +67,26 @@ INSERT INTO emp_department (emp_id, department_id)
 VALUES  (1, 1),
         (2, 1),
         (3, 2),
+        (4, 1);
+
+
+CREATE TABLE emp_faculty (
+    e_f_id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_id INT,
+    faculty_id INT
+);
+
+INSERT INTO emp_faculty (emp_id, faculty_id)
+VALUES  (1, 1),
+        (2, 1),
+        (3, 1),
         (4, 1),
         (5, 1),
-        (6, 2);
+        (6, 1),
+        (6, 2),
+        (6, 3),
+        (6, 4),
+        (6, 5);
 
 
 CREATE TABLE emp_course (
@@ -118,35 +135,8 @@ CREATE TABLE exams (
     count_of_assistants INT
 );
 
-/*
-INSERT INTO exams (course_id, exam_date, exam_time, number_of_classes, count_of_assistants)
-VALUES  (1, '2024-05-06', '09:00:00', 2, 2),
-        (2, '2024-05-09', '11:00:00', 2, 2),
-        (3, '2024-05-05', '09:00:00', 1, 1),
-        (4, '2024-05-10', '11:00:00', 2, 2),
-        (5, '2024-05-12', '09:00:00', 2, 2),
-        (6, '2024-05-13', '11:00:00', 2, 2),
-        (7, '2024-05-14', '11:00:00', 3, 3),
-        (8, '2024-05-15', '18:00:00', 4, 4),
-        (9, '2024-05-16', '09:00:00', 1, 1);
-*/
-
-
 CREATE TABLE assistant_exam (
     a_e_id INT AUTO_INCREMENT PRIMARY KEY,
     emp_id INT,
     exam_id INT
 );
-
-/*
-INSERT INTO assistant_exam (emp_id, exam_id)
-VALUES  (1, 1),
-        (1, 2),
-        (1, 3),
-        (1, 4),
-        (2, 1),
-        (2, 2),
-        (2, 3),
-        (2, 5),
-        (2, 6);
-*/

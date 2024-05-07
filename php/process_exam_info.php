@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['emp_username'])) {
-    header("Location: ../html/login.html"); // Replace with the login page URL
+    header("Location: ../html/login.html");
     exit();
 }
 
@@ -38,33 +38,23 @@ if (!$conn) {
     $time = $_POST['time'];
     $course_code = mysqli_real_escape_string($conn, $course_code);
 
-    $sql_course = "SELECT * FROM courses WHERE course_code = '$course_code'";
-    $result_course = mysqli_query($conn, $sql_course) or die("16");
+    $sql_emp = "SELECT * FROM employees WHERE emp_role = 'assistant' ORDER BY emp_score ASC";
+    $result_emp = mysqli_query($conn, $sql_emp) or die("18");
 
-    if (mysqli_num_rows($result_course) == 0) {
+    $assistant_count = mysqli_num_rows($result_emp);
+    if ($assistant_count < $num_assistants) {
         mysqli_close($conn);
         header("Location: ../php/add_exam.php?error=100");
         exit();
     }
 
+    $sql_course = "SELECT * FROM courses WHERE course_code = '$course_code'";
+    $result_course = mysqli_query($conn, $sql_course) or die("16");
     $row_course = mysqli_fetch_assoc($result_course);
-
-    $sql_department = "SELECT * FROM emp_department WHERE emp_id = " . $_SESSION['emp_id'];
-    $result_department = mysqli_query($conn, $sql_department) or die("15");
-    $row_department = mysqli_fetch_assoc($result_department);
-
-    if ($row_course['department_id'] != $row_department['department_id']) {
-        mysqli_close($conn);
-        header("Location: ../php/add_exam.php?error=200");
-        exit();
-    }
 
     $sql_exam = "INSERT INTO exams (course_id, exam_date, exam_time, number_of_classes, count_of_assistants) VALUES ('" . $row_course['course_id'] . "', '$date', '$time', '$num_class', '$num_assistants')";
     $result_exam = mysqli_query($conn, $sql_exam) or die("17");
     $inserted_exam_id = mysqli_insert_id($conn);
-
-    $sql_emp = "SELECT * FROM employees WHERE emp_role = 'assistant' ORDER BY emp_score ASC";
-    $result_emp = mysqli_query($conn, $sql_emp) or die("18");
 
     $count = 0;
     $assigned_assistants = array();

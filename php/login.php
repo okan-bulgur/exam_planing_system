@@ -33,6 +33,15 @@ if(mysqli_num_rows($result) == 1){
     }else if($row['emp_role'] == "secretary"){
         header("Location: ../php/secretary_page.php");
     }
+    else if($row['emp_role'] == "head_of_secretary"){
+        header("Location: ../php/head_of_secretary_page.php");
+    }
+    else if($row['emp_role'] == "head_of_department"){
+        header("Location: ../php/head_of_department_page.php");
+    }
+    else if($row['emp_role'] == "dean"){
+        header("Location: ../php/dean_page.php");
+    }
 
 }
 else{

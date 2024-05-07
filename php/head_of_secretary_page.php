@@ -22,7 +22,7 @@ if (!$conn) {
 <html>
 
 <head>
-    <title>Secretary Page</title>
+    <title>Head of Secretary Page</title>
     <link rel="stylesheet" type="text/css" href="../styles/secretary_page.css">
 </head>
 

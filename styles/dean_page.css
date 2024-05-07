@@ -78,15 +78,3 @@ th {
 .refresh-button:hover {
     background-color: black;
 }
-
-.week-plan {
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navigate-week {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
