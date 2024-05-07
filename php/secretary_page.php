@@ -22,23 +22,31 @@ if (!$conn) {
 <html>
 
 <head>
-    <title>Secretary Page</title>
+    <?php
+        echo "<title>Secretary " . $_SESSION['emp_name'] . " " . $_SESSION['emp_surname'] . "</title>"
+    ?>
     <link rel="stylesheet" type="text/css" href="../styles/secretary_page.css">
 </head>
 
 <body>
     <button onclick="location.href='../php/logout.php'" class="logout-button">Log Out</button>
-    <h1>Welcome <?php echo $_SESSION['emp_name'] . " " . $_SESSION['emp_surname']; ?></h1>
-    <button onclick="location.href = '../php/add_exam.php';">Add New Exam</button>
-    <button onclick="location.href = '../php/assistants_scores.php';">View Assistants Scores</button>
 
-    <?php
-        if (isset($_GET['error'])) {
-            if ($_GET['error'] == 101) {
-                echo "<script>alert('No assistants found.');</script>";
+    <div class="container">
+        <h1>Welcome <?php echo $_SESSION['emp_name'] . " " . $_SESSION['emp_surname']; ?></h1>
+
+        <button onclick="location.href = '../php/add_exam.php';">Add New Exam</button><br><br>
+        <button onclick="location.href = '../php/assistants_scores.php';">View Assistants Scores</button>
+        
+        <?php
+            if (isset($_GET['error'])) {
+                if ($_GET['error'] == 101) {
+                    echo "<script>alert('No assistants found.');</script>";
+                }
             }
-        }
-    ?>
+        ?>
+    </div>
+
+
 </body>
 
 </html>

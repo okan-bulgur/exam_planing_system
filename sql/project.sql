@@ -22,18 +22,10 @@ INSERT INTO departments (faculty_id, department_name)
 VALUES  (1, 'Computer Engineering'),
         (1, 'Electrical and Electronic Engineering'),
         (1, 'Industrial Engineering'),
-        (1, 'Mechanical Engineering'),
         (2, 'Mathematics'),
         (2, 'Physics'),
-        (2, 'Chemistry'),
         (3, 'Nutrition and Dietetics'),
-        (3, 'Nursing'),
-        (3, 'Physiotherapy'),
-        (4, 'Turkish Language and Literature'),
-        (4, 'English Language and Literature'),
         (4, 'History'),
-        (5, 'Economics'),
-        (5, 'Business Administration'),
         (5, 'International Relations');
 
 CREATE TABLE employees (
@@ -48,11 +40,35 @@ CREATE TABLE employees (
 );
 
 INSERT INTO employees (emp_username, emp_email, emp_password, emp_name, emp_surname, emp_role)
-VALUES  ('okan_bulgur', 'okan_bulgur@gmail.com', '123', 'Okan', 'Bulgur', 'assistant'),
-        ('furkan_bulgur', 'furkan_bulgur@gmail.com', '123', 'Furkan', 'Bulgur', 'assistant'),
-        ('burcu_selcuk', 'burcuselcuk@gmail.com', '123', 'Burcu', 'Selcuk', 'secretary'),
+VALUES  ('batuhan_edguer', 'batuhan_edguer@gmail.com', '123', 'Batuhan', 'Edgüer', 'assistant'),
+        ('osman_kerem_perente', 'osman_kerem_perente@gmail.com', '123', 'Osman Kerem', 'Perente', 'assistant'),
+        ('gulsah_gokhan_gokcek', 'gulsah_gokhan_gokcek@gmail.com', '123', 'Gülşah', 'Gökhan Gökçen', 'assistant'),
+        ('burcu_selcuk', 'burcuselcuk@gmail.com', '123', 'Burcu', 'Selcuk', 'assistant'),
+        ('ece_kartal', 'ece_kartal@gmail.com', '123', 'Ece', 'Kartal', 'assistant'),
+        ('ali_bayram', 'ali_bayram@gmail.com', '123', 'Ali', 'Bayram', 'assistant'),
+        ('alara_sensoy', 'alara_sensoy@gmail.com', '123', 'Alara', 'Şensoy', 'assistant'),
+        ('ekin_ustundag', 'ekin_ustundag@gmail.com', '123', 'Ekin', 'Üstündağ', 'assistant'),
+        ('alp_aslan', 'alp_aslan@gmail.com', '123', 'Alp', 'Aslan', 'secretary'),
+        ('salih_kara', 'salih_kara@gmail.com', '123', 'Salih', 'Kara', 'secretary'),
+        ('mustafa_karsli', 'mustafa_karsli@gmail.com', '123', 'Mustafa', 'Karsli', 'secretary'),
+        ('selami_cetin', 'selami_cetin@gmail.com', '123', 'Selami', 'Çetin', 'secretary'),
+        ('harun_deniz', 'harun_deniz@gmail.com', '123', 'Harun', 'Deniz', 'secretary'),
+        ('kamil_er', 'kamil_er@gmail.com', '123', 'Kamil', 'Er', 'secretary'),
+        ('ahmet_can', 'ahmet_can@gmail.com', '123', 'Ahmet', 'Can', 'secretary'),
+        ('pelin_kelle', 'pelin_kelle@gmail.com', '123', 'Pelin', 'Kelle', 'secretary'),
         ('gurhan_kucuk', 'gurhan_kucuk@gmail.com', '123', 'Gürhan', 'Küçük', 'head_of_department'),
+        ('mehmet_ozturk', 'mehmet_ozturk@gmail.com', '123', 'Mehmet', 'Öztürk', 'head_of_department'),
+        ('furkan_bulgur', 'furkan_bulgur@gmail.com', '123', 'Furkan', 'Bulgur', 'head_of_department'),
+        ('alp_cetin', 'alp_cetin@gmail.com', '123', 'Alp', 'Çetin', 'head_of_department'),
+        ('ahmet_ozdemir', 'ahmet_ozdemir@gmail.com', '123', 'Ahmet', 'Özdemir', 'head_of_department'),
+        ('haluk_karaduman', 'haluk_karaduman@gmail.com', '123', 'Haluk', 'Karaduman', 'head_of_department'),
+        ('melih_ozkan', 'melih_ozkan@gmail.com', '123', 'Melih', 'Özkan', 'head_of_department'),
+        ('mert_elli', 'mert_elli@gmail.com', '123', 'Mert', 'Elli', 'head_of_department'),
         ('ali_bas', 'ali_bas@gmail.com', '123', 'Ali', 'Bas', 'head_of_secretary'),
+        ('mehmet_ali', 'mehmet_ali@gmail.com', '123', 'Mehmet', 'Ali', 'head_of_secretary'),
+        ('ece_ozdemir', 'ece_ozdemir@gmail.com', '123', 'Ece', 'Özdemir', 'head_of_secretary'),
+        ('ayse_kaya', 'ayse_kaya@gmail.com', '123', 'Ayşe', 'Kaya', 'head_of_secretary'),
+        ('serdar_ozdemir', 'serdar_ozdemir@gmail.com', '123', 'Serdar', 'Özdemir', 'head_of_secretary'),
         ('serkan_topaloglu', 'serkan_topaloglu@gmail.com', '123', 'Serkan', 'Topaloğlu', 'dean');
     
 
@@ -65,9 +81,30 @@ CREATE TABLE emp_department (
 
 INSERT INTO emp_department (emp_id, department_id)
 VALUES  (1, 1),
-        (2, 1),
-        (3, 2),
-        (4, 1);
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+        (6, 6),
+        (7, 7),
+        (8, 8),
+        (9, 1),
+        (10, 2),
+        (11, 3),
+        (12, 4),
+        (13, 5),
+        (14, 6),
+        (15, 7),
+        (16, 8),
+        (17, 1),
+        (18, 2),
+        (19, 3),
+        (20, 4),
+        (21, 5),
+        (22, 6),
+        (23, 7),
+        (24, 8);
+
 
 
 CREATE TABLE emp_faculty (
@@ -80,13 +117,37 @@ INSERT INTO emp_faculty (emp_id, faculty_id)
 VALUES  (1, 1),
         (2, 1),
         (3, 1),
-        (4, 1),
-        (5, 1),
-        (6, 1),
-        (6, 2),
+        (4, 2),
+        (5, 2),
         (6, 3),
-        (6, 4),
-        (6, 5);
+        (7, 4),
+        (8, 5),
+        (9, 1),
+        (10, 1),
+        (11, 1),
+        (12, 2),
+        (13, 2),
+        (14, 3),
+        (15, 4),
+        (16, 5),
+        (17, 1),
+        (18, 1),
+        (19, 1),
+        (20, 2),
+        (21, 2),
+        (22, 3),
+        (23, 4),
+        (24, 5),
+        (25, 1),
+        (26, 2),
+        (27, 3),
+        (28, 4),
+        (29, 5),
+        (30, 1),
+        (30, 2),
+        (30, 3),
+        (30, 4),
+        (30, 5);
 
 
 CREATE TABLE emp_course (
@@ -100,7 +161,14 @@ VALUES  (1, 1),
         (1, 2),
         (1, 3),
         (2, 2),
-        (2, 4);
+        (2, 4),
+        (3, 5),
+        (3, 6),
+        (4, 7),
+        (5, 8),
+        (6, 9),
+        (7, 1),
+        (8, 2);
 
 
 CREATE TABLE courses (

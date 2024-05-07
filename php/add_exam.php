@@ -22,72 +22,8 @@ if (!$conn) {
 <html>
 
 <head>
-    <title>Add Exam Page</title>
+    <title>Add Exam</title>
     <link rel="stylesheet" type="text/css" href="../styles/add_exam.css">
-    <style>
-        .error {
-            text-align: center;
-            color: red;
-        }
-
-        .success {
-            text-align: center;
-            color: green;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            float: left;
-            background-color: #ccc;
-            color: black;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .back-button:hover {
-            color: white;
-            background-color: black;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 5px;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .assigned-assistants {
-            text-align: center;
-        }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        select option {
-            background-color: #f0f0f0;
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        select option:hover {
-            background-color: #ccc;
-        }
-        
-    </style>
 </head>
 
 <body>

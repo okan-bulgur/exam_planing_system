@@ -43,7 +43,9 @@ $_SESSION['course_list'] = $course_list;
 <html>
 
 <head>
-    <title>Asistant Page</title>
+    <?php
+        echo "<title>Asistant " . $_SESSION['emp_name'] . " " . $_SESSION['emp_surname'] . "</title>"
+    ?>
     <link rel="stylesheet" type="text/css" href="../styles/assistant_page.css">
 </head>
 
@@ -93,7 +95,7 @@ $_SESSION['course_list'] = $course_list;
 
         $week = isset($_GET['week']) ? $_GET['week'] : date('W');
 
-        echo "<div display: flex; justify-content: space-between; align-items: center;>";
+        echo "<div class='week-plan'>";
         echo "<h2>Weekly Plan (Week: " . $week .")</h2>";
         echo "<button onclick='location.reload()' class='refresh-button'>Refresh</button>";
         echo "</div>";
@@ -136,7 +138,7 @@ $_SESSION['course_list'] = $course_list;
         echo "</tbody>";
         echo "</table>";
 
-        echo "<div style='display: flex; justify-content: space-between; align-items: center;'>";
+        echo "<div class='navigate-week'>";
         echo "<button onclick='location.href=\"../php/assistant_page.php?week=" . ($week - 1) . "\"'>Previous Week</button>";
         echo "<button onclick='location.href=\"../php/assistant_page.php?week=" . ($week + 1) . "\"'>Next Week</button>";
         echo "</div>";
