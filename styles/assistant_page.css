@@ -79,6 +79,19 @@ th {
     background-color: black;
 }
 
+.select-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.select-button:hover {
+    background-color: #106713;
+}
+
 .week-plan {
     display: flex; 
     justify-content: space-between;

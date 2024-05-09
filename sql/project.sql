@@ -43,7 +43,7 @@ INSERT INTO employees (emp_username, emp_email, emp_password, emp_name, emp_surn
 VALUES  ('batuhan_edguer', 'batuhan_edguer@gmail.com', '123', 'Batuhan', 'Edgüer', 'assistant'),
         ('osman_kerem_perente', 'osman_kerem_perente@gmail.com', '123', 'Osman Kerem', 'Perente', 'assistant'),
         ('gulsah_gokhan_gokcek', 'gulsah_gokhan_gokcek@gmail.com', '123', 'Gülşah', 'Gökhan Gökçen', 'assistant'),
-        ('burcu_selcuk', 'burcuselcuk@gmail.com', '123', 'Burcu', 'Selcuk', 'assistant'),
+        ('burcu_selcuk', 'burcu_selcuk@gmail.com', '123', 'Burcu', 'Selcuk', 'assistant'),
         ('ece_kartal', 'ece_kartal@gmail.com', '123', 'Ece', 'Kartal', 'assistant'),
         ('ali_bayram', 'ali_bayram@gmail.com', '123', 'Ali', 'Bayram', 'assistant'),
         ('alara_sensoy', 'alara_sensoy@gmail.com', '123', 'Alara', 'Şensoy', 'assistant'),
@@ -156,21 +156,6 @@ CREATE TABLE emp_course (
     course_id INT
 );
 
-INSERT INTO emp_course (emp_id, course_id)
-VALUES  (1, 1),
-        (1, 2),
-        (1, 3),
-        (2, 2),
-        (2, 4),
-        (3, 5),
-        (3, 6),
-        (4, 7),
-        (5, 8),
-        (6, 9),
-        (7, 1),
-        (8, 2);
-
-
 CREATE TABLE courses (
     course_id INT AUTO_INCREMENT PRIMARY KEY,
     department_id INT,
@@ -192,6 +177,39 @@ VALUES  (1, 'Computer Science', 'CS101', 3, 'Fall'),
         (6, 'Physics', 'PHYS101', 3, 'Spring'),
         (7, 'Chemistry', 'CHEM101', 3, 'Fall');
 
+
+CREATE TABLE Schedule (
+    schedule_id INT AUTO_INCREMENT PRIMARY KEY,
+    course_id INT,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+    course_day INT,
+    course_time TIME
+);
+
+INSERT INTO Schedule (course_id, course_day, course_time)
+VALUES  (1, 1, '09:00'),
+        (1, 2, '10:00'),
+        (1, 5, '13:00'),
+        (2, 2, '13:00'),
+        (2, 3, '11:00'),
+        (3, 1, '09:00'),
+        (3, 2, '10:00'),
+        (3, 5, '13:00'),
+        (4, 2, '13:00'),
+        (4, 3, '11:00'),
+        (5, 1, '09:00'),
+        (5, 2, '10:00'),
+        (5, 5, '13:00'),
+        (6, 2, '13:00'),
+        (6, 3, '11:00'),
+        (7, 1, '09:00'),
+        (7, 2, '10:00'),
+        (7, 5, '13:00'),
+        (8, 2, '13:00'),
+        (8, 3, '11:00'),
+        (9, 1, '09:00'),
+        (9, 2, '13:00'),
+        (9, 3, '11:00');
 
 CREATE TABLE exams (
     exam_id INT AUTO_INCREMENT PRIMARY KEY,

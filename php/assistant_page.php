@@ -17,6 +17,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 } 
 
+/*
 $sql = "SELECT * FROM emp_course WHERE emp_id = " . $_SESSION['emp_id'];
 $result = mysqli_query($conn,$sql) or die("12");
 
@@ -34,8 +35,9 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo "No courses found.";
 }
-
 $_SESSION['course_list'] = $course_list;
+*/
+
 
 ?>
 
@@ -56,42 +58,68 @@ $_SESSION['course_list'] = $course_list;
 
     <button onclick="location.href='../php/logout.php'" class="logout-button">Log Out</button>
 
-    <form action="course_info.php" method="post">
-        <h2>Course Selection</h2>
-        <select name="selected_course">
-            <?php
-                foreach ($course_list as $course) {
-                    echo "<option value='" . $course['course_id'] . "'>" . $course['course_code'] . "</option>";
-                }
-            ?>
-        </select>
-        <input type="submit" value="Select Course">
-    </form>
-
+    <h2>Course Selection</h2>
 
     <?php
-        echo "<h2>Course List</h2>";
-        echo "<table>";
-        echo "<thead>";
-        echo "<tr>";
-        echo "<th>Course Code</th>";
-        echo "<th>Course Name</th>";
-        echo "<th>Course Credits</th>";
-        echo "<th>Course Term</th>";
-        echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
+        echo "<form method='POST' action='../php/assistant_page.php'>";
 
-        foreach ($course_list as $course) {
-            echo "<tr>";
-            echo "<td>" . $course['course_code'] . "</td>";
-            echo "<td>" . $course['course_name'] . "</td>";
-            echo "<td>" . $course['course_credits'] . "</td>";
-            echo "<td>" . $course['course_term'] . "</td>";
-            echo "</tr>";
+        $sql_department = "SELECT * FROM emp_department WHERE emp_id = " . $_SESSION['emp_id'];
+        $result_department = mysqli_query($conn, $sql_department) or die("1");
+        $department_row = mysqli_fetch_assoc($result_department);
+
+        $sql_courses = "SELECT * FROM courses WHERE department_id = " . $department_row['department_id'];
+        $result_courses = mysqli_query($conn, $sql_courses) or die("2");
+
+        $sql_emp_course = "SELECT * FROM emp_course WHERE emp_id = " . $_SESSION['emp_id'];
+        $result_emp_course = mysqli_query($conn, $sql_emp_course) or die("3");
+
+        $emp_courses = array();
+        if (mysqli_num_rows($result_emp_course) > 0) {
+            while ($emp_course_row = mysqli_fetch_assoc($result_emp_course)) {
+                $emp_courses[] = $emp_course_row['course_id'];
+            }
         }
-        echo "</tbody>";
-        echo "</table>";
+        
+        if (mysqli_num_rows($result_courses) > 0) {
+            while ($course_row = mysqli_fetch_assoc($result_courses)) {
+                if (!in_array($course_row['course_id'], $emp_courses)) {
+                    echo "<input type='checkbox' name='selected_courses[]' value='" . $course_row['course_id'] . "'>" . $course_row['course_code'] . "<br>";
+                }
+            }
+        }
+
+        echo "<br><button class='select-button' type='submit'>Select</button>";
+        echo "</form>";
+        
+        if(isset($_POST['selected_courses'])){
+            foreach($_POST['selected_courses'] as $course_id){
+
+                $sql_courses = "SELECT * FROM emp_course WHERE emp_id = " . $_SESSION['emp_id'] . " AND course_id = " . $course_id;
+                $result_courses = mysqli_query($conn, $sql_courses) or die("4");
+                
+                if (mysqli_num_rows($result_courses) == 0) {
+                    $sql_insert = "INSERT INTO emp_course (emp_id, course_id) VALUES (" . $_SESSION['emp_id'] . ", " . $course_id . ")";
+                    mysqli_query($conn, $sql_insert) or die("5");
+                }
+            }
+
+            header("Location: assistant_page.php");
+        }
+
+        echo "<h2>Selected Courses:</h2>";
+        echo "<ul>";
+        $sql_courses = "SELECT * FROM emp_course WHERE emp_id = " . $_SESSION['emp_id'];
+        $result_courses = mysqli_query($conn, $sql_courses) or die("6");
+        if (mysqli_num_rows($result_courses) > 0) {
+            while ($course_row = mysqli_fetch_assoc($result_courses)) {
+                $sql_course = "SELECT * FROM courses WHERE course_id = " . $course_row['course_id'];
+                $result_course = mysqli_query($conn, $sql_course) or die("7");
+                $course = mysqli_fetch_assoc($result_course);
+                echo "<li>" . $course['course_code'] . "</li>";
+            }
+        }
+        echo "</ul>";
+
 
         $week = isset($_GET['week']) ? $_GET['week'] : date('W');
 
@@ -103,44 +131,96 @@ $_SESSION['course_list'] = $course_list;
         echo "<table>";
         echo "<thead>";
         echo "<tr>";
-        echo "<th>Course Code</th>";
-        echo "<th>Exam Date</th>";
-        echo "<th>Exam Time</th>";
-        echo "<th>Number of Classes</th>";
-        echo "<th>Count of Asistants</th>";
+        echo "<th>Hour</th>";
+        echo "<th>Monday</th>";
+        echo "<th>Tuesday</th>";
+        echo "<th>Wednesday</th>";
+        echo "<th>Thursday</th>";
+        echo "<th>Friday</th>";
+        echo "<th>Saturday</th>";
+        echo "<th>Sunday</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
 
-        $sql_as_ex = "SELECT * FROM assistant_exam WHERE emp_id = " . $_SESSION['emp_id'];
-        $result_as_ex = mysqli_query($conn, $sql_as_ex) or die("14");
+        $hours = array("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
 
-        if (mysqli_num_rows($result_as_ex) > 0){
-            while ($as_ex_row = mysqli_fetch_assoc($result_as_ex)) {
+        $sql_emp_course = "SELECT * FROM emp_course WHERE emp_id = " . $_SESSION['emp_id'];
+        $result_emp_course = mysqli_query($conn, $sql_emp_course) or die("3");
+        $emp_courses = array();
 
-                $sql_exam = "SELECT * FROM exams INNER JOIN courses ON exams.course_id = courses.course_id WHERE exam_id = " . $as_ex_row['exam_id'] . " AND WEEK(exams.exam_date) = " . $week . " ORDER BY exam_date, exam_time ASC";
-                $result_exam = mysqli_query($conn, $sql_exam) or die("15");
+        if (mysqli_num_rows($result_emp_course) > 0) {
+            while ($emp_course_row = mysqli_fetch_assoc($result_emp_course)) {
+                $emp_courses[] = $emp_course_row['course_id'];
+            }
+        }
+
+        $sql_deneme = "SELECT * FROM exams WHERE ";
+
+        foreach ($hours as $hour) {
+            echo "<tr>";
+            echo "<td>" . $hour . "</td>";
+
+            for ($i = 1; $i <= 7; $i++) {
+                $check = 0;
+
+                $courses = array();
+
+                $sql_exam = "SELECT * FROM assistant_exam
+                            INNER JOIN exams ON assistant_exam.exam_id = exams.exam_id
+                            INNER JOIN courses ON exams.course_id = courses.course_id
+                            WHERE assistant_exam.emp_id = " . $_SESSION['emp_id'] . " AND 
+                            WEEK(exams.exam_date) = " . $week . " AND DAYOFWEEK(exams.exam_date) = " . $i . " AND 
+                            exams.exam_time = '" . $hour . "' ORDER BY exams.exam_date, exams.exam_time ASC";
+
+                $result_exam = mysqli_query($conn, $sql_exam) or die("7");
 
                 if (mysqli_num_rows($result_exam) > 0) {
-                    while ($exam_row = mysqli_fetch_assoc($result_exam)) {
-                        echo "<tr>";
-                        echo "<td>" . $exam_row['course_code'] . "</td>";
-                        echo "<td>" . $exam_row['exam_date'] . "</td>";
-                        echo "<td>" . $exam_row['exam_time'] . "</td>";
-                        echo "<td>" . $exam_row['number_of_classes'] . "</td>";
-                        echo "<td>" . $exam_row['count_of_assistants'] . "</td>";
-                        echo "</tr>";
+                    $exam_row = mysqli_fetch_assoc($result_exam);
+                    $courses[] = $exam_row['course_code'] . " (Exam)";
+                    $check = 1;
+                }
+
+                foreach($emp_courses as $course_id){
+                    $sql_schedule = "SELECT * FROM schedule WHERE course_id = " . $course_id . " AND course_day = " . $i . " AND course_time = '" . $hour . "' ORDER BY course_day, course_time ASC";
+                    $result_schedule = mysqli_query($conn, $sql_schedule) or die("8");
+                    if (mysqli_num_rows($result_schedule) > 0) {
+                        while ($schedule_row = mysqli_fetch_assoc($result_schedule)) {
+                            $sql_course = "SELECT * FROM courses WHERE course_id = " . $schedule_row['course_id'];
+                            $result_course = mysqli_query($conn, $sql_course) or die("9");
+                            $course_row = mysqli_fetch_assoc($result_course);
+                            $courses[] = $course_row['course_code'];
+                        }
+                        $check = 1;
                     }
                 }
+
+                if ($check == 1){
+                    echo "<td>";
+                    foreach($courses as $course){
+                        echo $course . "<br>";
+                    }
+                    echo "</td>";
+                }
+
+                if ($check == 0) {
+                    echo "<td></td>";
+                }
             }
+
+            echo "</tr>";
         }
 
         echo "</tbody>";
         echo "</table>";
 
         echo "<div class='navigate-week'>";
-        echo "<button onclick='location.href=\"../php/assistant_page.php?week=" . ($week - 1) . "\"'>Previous Week</button>";
-        echo "<button onclick='location.href=\"../php/assistant_page.php?week=" . ($week + 1) . "\"'>Next Week</button>";
+        if ($week > 1){
+            echo "<button onclick='location.href=\"../php/assistant_page.php?week=" . ($week - 1) . "\"'>Previous Week</button>";
+        }
+        if ($week < 52){
+            echo "<button onclick='location.href=\"../php/assistant_page.php?week=" . ($week + 1) . "\"'>Next Week</button>";
+        }
         echo "</div>";
 
         mysqli_close($conn);
