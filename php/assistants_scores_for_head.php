@@ -74,7 +74,12 @@ if (!$conn) {
                     echo "<td>" . $row_assistants['emp_name'] . "</td>";
                     echo "<td>" . $row_assistants['emp_surname'] . "</td>";
                     echo "<td>" . $row_assistants['emp_score'] . "</td>";
-                    echo "<td>" . round(($row_assistants['emp_score'] / $row_scores['score_sum']) * 100, 2) . "%</td>";
+                    if ($row_scores['score_sum'] == 0) {
+                        echo "<td>0%</td>";
+                    }
+                    else{
+                        echo "<td>" . round(($row_assistants['emp_score'] / $row_scores['score_sum']) * 100, 2) . "%</td>";
+                    }
                     echo "</tr>";
                 }
             }

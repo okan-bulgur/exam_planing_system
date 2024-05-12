@@ -45,6 +45,10 @@ if (!$conn) {
     $sql_exam = "SELECT * FROM exams INNER JOIN courses ON exams.course_id = courses.course_id WHERE department_id = ". $department_id ." ORDER BY exam_date, exam_time ASC";
     $result_exam = mysqli_query($conn, $sql_exam) or die("3");
 
+    if (mysqli_num_rows($result_exam) == 0) {
+        echo "<h2>There are no exam for " . $department_name . "</h2>";
+    }
+
     if (mysqli_num_rows($result_exam) > 0) {
 
         echo "<div style='display: flex; justify-content: space-between; align-items: center;'>";

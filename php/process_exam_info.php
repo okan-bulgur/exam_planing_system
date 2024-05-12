@@ -134,14 +134,7 @@ if (!$conn) {
     $count = 0;
     $assigned_assistants = array();
 
-
-    echo "Available_assistants: <br>";
-
-    foreach($available_assistants as $assistant) {
-        echo $assistant . "<br>";
-    }
-
-    if (sizeof($available_assistants) != $num_assistants) {
+    if (sizeof($available_assistants) < $num_assistants) {
         mysqli_close($conn);
         header("Location: ../php/add_exam.php?error=100");
         exit();

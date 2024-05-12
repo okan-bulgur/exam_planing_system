@@ -1,3 +1,7 @@
+CREATE DATABASE exam_planning_system;
+
+USE exam_planning_system;
+
 CREATE TABLE faculties (
     faculty_id INT AUTO_INCREMENT PRIMARY KEY,
     faculty_name VARCHAR(50)

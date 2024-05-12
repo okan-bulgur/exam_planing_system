@@ -35,6 +35,7 @@ if (!$conn) {
         <h1>Welcome <?php echo $_SESSION['emp_name'] . " " . $_SESSION['emp_surname']; ?></h1>
 
         <button onclick="location.href = '../php/add_exam.php';">Add New Exam</button><br><br>
+        <button onclick="location.href = '../php/add_course.php';">Add New Course</button><br><br>
         <button onclick="location.href = '../php/assistants_scores.php';">View Assistants Scores</button>
         
         <?php

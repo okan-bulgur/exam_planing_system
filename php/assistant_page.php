@@ -124,7 +124,7 @@ $_SESSION['course_list'] = $course_list;
         $week = isset($_GET['week']) ? $_GET['week'] : date('W');
 
         echo "<div class='week-plan'>";
-        echo "<h2>Weekly Plan (Week: " . $week .")</h2>";
+        echo "<h2>Weekly Plan (Week: " . $week . ")</h2>";
         echo "<button onclick='location.reload()' class='refresh-button'>Refresh</button>";
         echo "</div>";
         
@@ -132,13 +132,13 @@ $_SESSION['course_list'] = $course_list;
         echo "<thead>";
         echo "<tr>";
         echo "<th>Hour</th>";
-        echo "<th>Monday</th>";
-        echo "<th>Tuesday</th>";
-        echo "<th>Wednesday</th>";
-        echo "<th>Thursday</th>";
-        echo "<th>Friday</th>";
-        echo "<th>Saturday</th>";
-        echo "<th>Sunday</th>";
+        echo "<th>Monday ( ". date('d-m-Y', strtotime(date('Y') . 'W' . $week . '1')) ." )</th>";
+        echo "<th>Tuesday ( ". date('d-m-Y', strtotime(date('Y') . 'W' . $week . '2')) ." )</th>";
+        echo "<th>Wednesday ( ". date('d-m-Y', strtotime(date('Y') . 'W' . $week . '3')) ." )</th>";
+        echo "<th>Thursday ( ". date('d-m-Y', strtotime(date('Y') . 'W' . $week . '4')) ." )</th>";
+        echo "<th>Friday ( ". date('d-m-Y', strtotime(date('Y') . 'W' . $week . '5')) ." )</th>";
+        echo "<th>Saturday ( ". date('d-m-Y', strtotime(date('Y') . 'W' . $week . '6')) ." )</th>";
+        echo "<th>Sunday ( ". date('d-m-Y', strtotime(date('Y') . 'W' . $week . '7')) ." )</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -165,12 +165,16 @@ $_SESSION['course_list'] = $course_list;
                 $check = 0;
 
                 $courses = array();
+                $day = ($i + 1)%7;
+                if ($day == 0) {
+                    $day = 7;
+                }
 
                 $sql_exam = "SELECT * FROM assistant_exam
                             INNER JOIN exams ON assistant_exam.exam_id = exams.exam_id
                             INNER JOIN courses ON exams.course_id = courses.course_id
                             WHERE assistant_exam.emp_id = " . $_SESSION['emp_id'] . " AND 
-                            WEEK(exams.exam_date) = " . $week . " AND DAYOFWEEK(exams.exam_date) = " . $i . " AND 
+                            WEEK(exams.exam_date, 1) = " . $week . " AND DAYOFWEEK(exams.exam_date) = " . $day . " AND 
                             exams.exam_time = '" . $hour . "' ORDER BY exams.exam_date, exams.exam_time ASC";
 
                 $result_exam = mysqli_query($conn, $sql_exam) or die("7");
