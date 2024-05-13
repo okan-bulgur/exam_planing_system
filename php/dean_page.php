@@ -97,6 +97,10 @@ if(isset($_POST['faculty'])) {
         $sql_exam = "SELECT * FROM exams INNER JOIN courses ON exams.course_id = courses.course_id WHERE department_id = ". $_POST['department'] ." ORDER BY exam_date, exam_time ASC";
         $result_exam = mysqli_query($conn, $sql_exam) or die("3");
 
+        if(mysqli_num_rows($result_exam) == 0){
+            echo "<h2 style='text-align: center'>No exam plan for " . $department_name . "</h2>";
+        }
+
         if (mysqli_num_rows($result_exam) > 0) {
             echo "<div style='display: flex; justify-content: space-between; align-items: center;'>";
             echo "<h2>Exam Plan (" . $department_name . ")</h2>";
