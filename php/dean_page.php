@@ -31,14 +31,6 @@ if(isset($_POST['faculty'])) {
 <head>
     <title>Dean <?php echo $_SESSION['emp_name'] . " " . $_SESSION['emp_surname']; ?></title>
     <link rel="stylesheet" type="text/css" href="../styles/dean_page.css">
-    <script>
-        window.onload = function() {
-            document.getElementById("faculty_form").onsubmit = function() {
-                var selectedValue = document.getElementById("faculty").value;
-                document.getElementById("faculty").value = selectedValue;
-            };
-        };
-    </script>
 </head>
 
 <body>
@@ -47,43 +39,29 @@ if(isset($_POST['faculty'])) {
     <h1>Welcome <?php echo $_SESSION['emp_name'] . " " . $_SESSION['emp_surname']; ?></h1>
     <div class="container">
 
-        <form id="faculty_form" action="" method="POST">
-            <label for="faculty">Select Faculty</label>
-            <select name='faculty' id='faculty'>
-                <?php
-                $sql_faculty = "SELECT * FROM faculties";
-                $result_faculty = mysqli_query($conn, $sql_faculty) or die("1");
-
-                if (mysqli_num_rows($result_faculty) > 0) {
-                    while ($row_faculty = mysqli_fetch_assoc($result_faculty)) {
-                        $selected = ($selected_faculty == $row_faculty['faculty_id']) ? "selected" : "";
-                        echo "<option value='" . $row_faculty['faculty_id'] . "' $selected>" . $row_faculty['faculty_name'] . "</option>";
-                    }
-                }
-                ?>
-            </select>
-            <input type='submit' value='Select'>
-            <br><br>
+        <form id="department_form" action="" method="POST">
 
             <?php
-            if(isset($_POST['faculty'])){
-                $selected_department = isset($_POST['department']) ? $_POST['department'] : "";
-                $sql_department = "SELECT * FROM departments WHERE faculty_id = " . $_POST['faculty'];
-                $result_department = mysqli_query($conn, $sql_department) or die("2");
+            $sql_faculty = "SELECT * FROM emp_faculty WHERE emp_id = " . $_SESSION['emp_id'];
+            $result_faculty = mysqli_query($conn, $sql_faculty) or die("1");
+            $row_faculty = mysqli_fetch_assoc($result_faculty);
 
-                if (mysqli_num_rows($result_department) > 0) {
-                    echo "<label for='department'>Select Department</label>";
-                    echo "<select name='department' id='department'>";
+            $selected_department = isset($_POST['department']) ? $_POST['department'] : "";
+            $sql_department = "SELECT * FROM departments WHERE faculty_id = " . $row_faculty['faculty_id'];
+            $result_department = mysqli_query($conn, $sql_department) or die("2");
 
-                    while ($row_department = mysqli_fetch_assoc($result_department)) {
-                        $selected = ($selected_department == $row_department['department_id']) ? "selected" : "";
-                        echo "<option value='" . $row_department['department_id'] . "' $selected>" . $row_department['department_name'] . "</option>";
-                    }
+            if (mysqli_num_rows($result_department) > 0) {
+                echo "<label for='department'>Select Department</label>";
+                echo "<select name='department' id='department'>";
 
-                    echo "</select>";
+                while ($row_department = mysqli_fetch_assoc($result_department)) {
+                    $selected = ($selected_department == $row_department['department_id']) ? "selected" : "";
+                    echo "<option value='" . $row_department['department_id'] . "' $selected>" . $row_department['department_name'] . "</option>";
                 }
-                echo "<input type='submit' value='Select'>";
+
+                echo "</select>";
             }
+            echo "<input type='submit' value='Select'>";
             ?>
         </form>
     </div>

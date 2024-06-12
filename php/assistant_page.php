@@ -15,28 +15,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
-} 
-
-/*
-$sql = "SELECT * FROM emp_course WHERE emp_id = " . $_SESSION['emp_id'];
-$result = mysqli_query($conn,$sql) or die("12");
-
-$course_list = array();
-
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $sql_course = "SELECT * FROM courses WHERE course_id =" . $row['course_id'];
-        $result_course = mysqli_query($conn, $sql_course) or die("13");
-        if (mysqli_num_rows($result_course) > 0) {
-            $course_row = mysqli_fetch_assoc($result_course);
-            $course_list[] = $course_row;
-        }
-    }
-} else {
-    echo "No courses found.";
 }
-$_SESSION['course_list'] = $course_list;
-*/
 
 
 ?>

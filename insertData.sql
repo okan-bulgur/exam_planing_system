@@ -73,7 +73,11 @@ VALUES  ('batuhan_edguer', 'batuhan_edguer@gmail.com', '123', 'Batuhan', 'Edgüe
         ('ece_ozdemir', 'ece_ozdemir@gmail.com', '123', 'Ece', 'Özdemir', 'head_of_secretary'),
         ('ayse_kaya', 'ayse_kaya@gmail.com', '123', 'Ayşe', 'Kaya', 'head_of_secretary'),
         ('serdar_ozdemir', 'serdar_ozdemir@gmail.com', '123', 'Serdar', 'Özdemir', 'head_of_secretary'),
-        ('serkan_topaloglu', 'serkan_topaloglu@gmail.com', '123', 'Serkan', 'Topaloğlu', 'dean');
+        ('serkan_topaloglu', 'serkan_topaloglu@gmail.com', '123', 'Serkan', 'Topaloğlu', 'dean'),
+        ('serhan_doboglu', 'serhan_doboglu@gmail.com', '123', 'Serhan', 'Doboglu', 'dean'),
+        ('ali_biyik', 'ali_biyik@gmail.com', '123', 'Ali', 'Biyik', 'dean'),
+        ('mehmet_korkmaz', 'mehmet_korkmaz@gmail.com', '123', 'Mehmet', 'Korkmaz', 'dean'),
+        ('feride_dinc', 'feride_dinc@gmail.com', '123', 'Feride', 'Dinc', 'dean');
     
 
 
@@ -148,10 +152,10 @@ VALUES  (1, 1),
         (28, 4),
         (29, 5),
         (30, 1),
-        (30, 2),
-        (30, 3),
-        (30, 4),
-        (30, 5);
+        (31, 2),
+        (32, 3),
+        (33, 4),
+        (34, 5);
 
 
 CREATE TABLE emp_course (
